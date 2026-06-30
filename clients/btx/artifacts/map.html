@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1E3A8A" id="meta-theme-color">
+  <title>Account Map</title>
+  <!-- Leaflet (interactive map library) + OpenStreetMap tiles. The one runtime
+       CDN dependency; a map needs network for tiles regardless. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <style>:root {
+  --accent: #1E3A8A;
+  --hot: #DD4B39;
+  --warm: #E8A33D;
+  --cool: #94A3B8;
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+#loading-screen {
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+}
+#app { display: flex; height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: 360px; max-width: 42vw; flex-shrink: 0;
+  background: var(--surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.sidebar-head { padding: 1rem 1.1rem .6rem; border-bottom: 1px solid var(--border); }
+.map-title { margin: 0; font-size: 1.15rem; color: var(--accent); }
+.map-sub { margin: .2rem 0 .5rem; font-size: .8rem; color: var(--text-muted); }
+.brief-link { font-size: .8rem; color: var(--accent); text-decoration: none; font-weight: 600; }
+.brief-link:hover { text-decoration: underline; }
+
+.controls { padding: .8rem 1.1rem; border-bottom: 1px solid var(--border); }
+.search {
+  width: 100%; padding: .5rem .6rem; border: 1px solid var(--border);
+  border-radius: 8px; font-size: .9rem; margin-bottom: .6rem;
+}
+.control-row { display: flex; align-items: center; gap: .5rem; font-size: .8rem; margin: .4rem 0; }
+.control-row label { color: var(--text-muted); white-space: nowrap; }
+.control-row select, .control-row input[type=range] { flex: 1; }
+.legend { display: flex; gap: .8rem; margin-top: .6rem; font-size: .72rem; color: var(--text-muted); }
+.legend .dot { display: inline-block; width: .7rem; height: .7rem; border-radius: 50%; margin-right: .25rem; vertical-align: middle; }
+.dot.hot { background: var(--hot); } .dot.warm { background: var(--warm); } .dot.cool { background: var(--cool); }
+
+.count-bar { padding: .5rem 1.1rem; font-size: .75rem; color: var(--text-muted); background: #fafafa; }
+
+/* Account list */
+.account-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; }
+.account-item {
+  padding: .6rem 1.1rem; border-bottom: 1px solid var(--border); cursor: pointer;
+}
+.account-item:hover { background: #f9fafb; }
+.account-item.unplaced { opacity: .7; cursor: default; }
+.ai-top { display: flex; align-items: center; gap: .5rem; }
+.fit-badge {
+  font-size: .68rem; font-weight: 700; color: #fff; border-radius: 999px;
+  padding: .08rem .45rem; flex-shrink: 0;
+}
+.fit-badge.hot { background: var(--hot); } .fit-badge.warm { background: var(--warm); } .fit-badge.cool { background: var(--cool); }
+.ai-name { font-weight: 600; font-size: .9rem; }
+.ai-meta { font-size: .74rem; color: var(--text-muted); margin-top: .15rem; }
+
+/* Map */
+.map-wrap { flex: 1; position: relative; }
+#map { position: absolute; inset: 0; }
+
+/* Popup */
+.popup-name { font-weight: 700; font-size: .95rem; margin-bottom: .1rem; }
+.popup-meta { font-size: .75rem; color: var(--text-muted); margin-bottom: .4rem; }
+.popup-fit { font-size: .8rem; margin: .35rem 0; }
+.popup-serve { margin: .35rem 0; }
+.serve-chip {
+  display: inline-block; font-size: .68rem; background: rgba(30,58,138,.1);
+  color: var(--accent); border-radius: 6px; padding: .1rem .4rem; margin: .1rem .15rem 0 0;
+}
+.popup-facts { font-size: .78rem; margin: .35rem 0; }
+.popup-facts div { margin: .12rem 0; }
+.popup-facts .pf-label { color: var(--text-muted); }
+.popup-link { font-size: .78rem; font-weight: 600; }
+.approx-note { font-size: .68rem; color: var(--warm); }
+.live-btn {
+  margin-top: .4rem; font-size: .75rem; cursor: pointer; border: 1px solid var(--accent);
+  background: #fff; color: var(--accent); border-radius: 6px; padding: .25rem .5rem;
+}
+
+@media (max-width: 720px) {
+  #app { flex-direction: column; }
+  .sidebar { width: 100%; max-width: none; height: 45vh; }
+  .map-wrap { height: 55vh; }
+}
+</style>
+</head>
+<body>
+  <div id="loading-screen" aria-live="polite">
+    <div class="loading-inner"><p>Loading account map…</p></div>
+  </div>
+
+  <div id="app" hidden>
+    <aside class="sidebar" id="sidebar">
+      <header class="sidebar-head">
+        <h1 class="map-title" id="map-title"></h1>
+        <p class="map-sub" id="map-sub"></p>
+        <a class="brief-link" id="brief-link" href="index.html">← Intelligence brief</a>
+      </header>
+
+      <div class="controls">
+        <input type="search" id="search" class="search" placeholder="Search accounts…" autocomplete="off">
+        <div class="control-row">
+          <label for="segment">Segment</label>
+          <select id="segment"></select>
+        </div>
+        <div class="control-row">
+          <label for="minfit">Min fit: <span id="minfit-val">0</span></label>
+          <input type="range" id="minfit" min="0" max="100" value="0" step="5">
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+
+      <div class="count-bar" id="count-bar"></div>
+      <ul class="account-list" id="account-list"></ul>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map"></div>
+    </main>
+  </div>
+
+  <script>window.__DATA_URL = 'map_targets.json';</script>
+  <script>'use strict';
+
+/* Account Map — reads map_targets.json (MapData) and renders an interactive
+   Leaflet map + a filterable account list. Static: all data is precomputed at
+   build time. See getLiveAccountData() for the live/authenticated-API seam. */
+
+const state = {
+  data: null,
+  map: null,
+  markers: {},                 // account id -> Leaflet marker
+  filters: { q: '', segment: '', minFit: 0 },
+};
+
+const TIER_COLOR = { hot: '#DD4B39', warm: '#E8A33D', cool: '#94A3B8' };
+const US_CENTER = { lat: 39.5, lon: -98.35 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const url = window.__DATA_URL || 'map_targets.json';
+  fetch(url)
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(data => { state.data = data; boot(); })
+    .catch(err => {
+      document.getElementById('loading-screen').innerHTML =
+        '<div class="loading-inner"><p>Could not load account data.</p><p style="color:#999">'
+        + esc(err.message) + '</p></div>';
+    });
+});
+
+function boot() {
+  const cfg = state.data.config || {};
+  applyAccent(cfg.accent_color);
+  document.getElementById('map-title').textContent = cfg.title || 'Account Map';
+  const placed = state.data.targets.filter(t => t.geo).length;
+  document.getElementById('map-sub').textContent =
+    (cfg.region ? cfg.region + ' · ' : '') + state.data.targets.length + ' accounts · '
+    + placed + ' mapped';
+  buildLegend();
+  buildSegmentFilter(cfg);
+  wireControls();
+  initMap(cfg);
+  render();
+  document.getElementById('loading-screen').hidden = true;
+  document.getElementById('app').hidden = false;
+}
+
+function applyAccent(hex) {
+  if (!hex) return;
+  document.documentElement.style.setProperty('--accent', hex);
+  const meta = document.getElementById('meta-theme-color');
+  if (meta) meta.setAttribute('content', hex);
+}
+
+function buildLegend() {
+  const el = document.getElementById('legend');
+  el.innerHTML =
+    '<span><span class="dot hot"></span>Strong</span>' +
+    '<span><span class="dot warm"></span>Possible</span>' +
+    '<span><span class="dot cool"></span>Low</span>';
+}
+
+function buildSegmentFilter(cfg) {
+  const sel = document.getElementById('segment');
+  const segs = (cfg.segments && cfg.segments.length)
+    ? cfg.segments
+    : [...new Set(state.data.targets.map(t => t.segment).filter(Boolean))].sort();
+  sel.innerHTML = '<option value="">All segments</option>'
+    + segs.map(s => '<option value="' + esc(s) + '">' + esc(s) + '</option>').join('');
+}
+
+function wireControls() {
+  const search = document.getElementById('search');
+  search.addEventListener('input', () => { state.filters.q = search.value.trim().toLowerCase(); render(); });
+  document.getElementById('segment').addEventListener('change', e => {
+    state.filters.segment = e.target.value; render();
+  });
+  const minfit = document.getElementById('minfit');
+  minfit.addEventListener('input', () => {
+    state.filters.minFit = Number(minfit.value);
+    document.getElementById('minfit-val').textContent = minfit.value;
+    render();
+  });
+}
+
+function initMap(cfg) {
+  if (typeof L === 'undefined') return;                 // Leaflet unavailable (e.g. offline test)
+  const c = cfg.center || US_CENTER;
+  state.map = L.map('map').setView([c.lat, c.lon], cfg.zoom || 5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18, attribution: '© OpenStreetMap contributors',
+  }).addTo(state.map);
+}
+
+function passesFilters(t) {
+  const f = state.filters;
+  if (t.fit_score < f.minFit) return false;
+  if (f.segment && t.segment !== f.segment) return false;
+  if (f.q) {
+    const hay = [t.name, t.segment, t.city, t.state, t.fit_rationale,
+      ...(t.serve_with || []), ...((t.facts || []).map(x => x.label + ' ' + x.value))]
+      .filter(Boolean).join(' ').toLowerCase();
+    if (!hay.includes(f.q)) return false;
+  }
+  return true;
+}
+
+function render() {
+  const visible = state.data.targets.filter(passesFilters);
+  renderMarkers(visible);
+  renderList(visible);
+  const placed = visible.filter(t => t.geo).length;
+  document.getElementById('count-bar').textContent =
+    visible.length + ' shown · ' + placed + ' on map';
+}
+
+function renderMarkers(visible) {
+  if (!state.map) return;
+  Object.values(state.markers).forEach(m => state.map.removeLayer(m));
+  state.markers = {};
+  const visibleIds = new Set(visible.map(t => t.id));
+  visible.forEach(t => {
+    if (!t.geo) return;
+    const marker = L.circleMarker([t.geo.lat, t.geo.lon], {
+      radius: 6 + Math.round(t.fit_score / 18),
+      color: '#fff', weight: 1.5, fillColor: TIER_COLOR[t.fit_tier] || TIER_COLOR.cool,
+      fillOpacity: 0.9,
+    }).addTo(state.map);
+    marker.bindPopup(popupHtml(t), { maxWidth: 300 });
+    marker.on('popupopen', () => wireLiveButton(t));
+    state.markers[t.id] = marker;
+  });
+}
+
+function popupHtml(t) {
+  const loc = [t.city, t.state].filter(Boolean).join(', ');
+  const facts = (t.facts || []).map(f =>
+    '<div><span class="pf-label">' + esc(f.label) + ':</span> ' + esc(f.value) + '</div>').join('');
+  const serve = (t.serve_with || []).map(s => '<span class="serve-chip">' + esc(s) + '</span>').join('');
+  return '' +
+    '<div class="popup-name">' + esc(t.name) + '</div>' +
+    '<div class="popup-meta">' + esc([t.segment, loc].filter(Boolean).join(' · ')) +
+      (t.geo_approx ? ' <span class="approx-note">(approx · state-level)</span>' : '') + '</div>' +
+    '<div class="popup-fit"><b>Fit ' + t.fit_score + '</b> — ' + esc(t.fit_rationale) + '</div>' +
+    (serve ? '<div class="popup-serve"><b>How we can serve them:</b><br>' + serve + '</div>' : '') +
+    (facts ? '<div class="popup-facts">' + facts + '</div>' : '') +
+    (t.url ? '<a class="popup-link" href="' + esc(t.url) + '" target="_blank" rel="noopener">Open source ↗</a>' : '') +
+    '<div><button class="live-btn" data-id="' + esc(t.id) + '">Refresh live data</button></div>';
+}
+
+function renderList(visible) {
+  const list = document.getElementById('account-list');
+  list.innerHTML = '';
+  visible.forEach(t => {
+    const li = el('li', 'account-item' + (t.geo ? '' : ' unplaced'));
+    const loc = [t.city, t.state].filter(Boolean).join(', ');
+    li.innerHTML =
+      '<div class="ai-top"><span class="fit-badge ' + t.fit_tier + '">' + t.fit_score + '</span>' +
+      '<span class="ai-name">' + esc(t.name) + '</span></div>' +
+      '<div class="ai-meta">' + esc([t.segment, loc].filter(Boolean).join(' · ') ||
+        (t.geo ? '' : 'no location')) + '</div>';
+    if (t.geo && state.map) {
+      li.addEventListener('click', () => {
+        state.map.setView([t.geo.lat, t.geo.lon], Math.max(state.map.getZoom(), 8));
+        const m = state.markers[t.id];
+        if (m) m.openPopup();
+      });
+    }
+    list.appendChild(li);
+  });
+}
+
+/* ── Live / authenticated-API seam ──────────────────────────────────────────
+   Returns a Promise of fresh, per-account data (e.g. current capacity, open
+   quotes, account-owner notes) from BTX's own systems. Today it resolves null
+   (static build). To wire a live CRM/ERP, point this at a small serverless
+   PROXY that holds the API key server-side and returns JSON — change ONLY this
+   function. Never put a secret in this file; it ships to the browser. */
+function getLiveAccountData(accountId) {
+  // return fetch('/api/account/' + encodeURIComponent(accountId)).then(r => r.json());
+  return Promise.resolve(null);
+}
+
+function wireLiveButton(t) {
+  const btn = document.querySelector('.live-btn[data-id="' + cssEscape(t.id) + '"]');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    btn.textContent = 'Loading…';
+    getLiveAccountData(t.id).then(live => {
+      btn.textContent = live ? 'Live data loaded' : 'No live source configured';
+    }).catch(() => { btn.textContent = 'Live fetch failed'; });
+  });
+}
+
+/* helpers */
+function el(tag, cls) { const e = document.createElement(tag); if (cls) e.className = cls; return e; }
+function esc(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function cssEscape(s) { return String(s).replace(/"/g, '\\"'); }
+</script>
+</body>
+</html>

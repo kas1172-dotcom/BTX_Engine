@@ -1,0 +1,15 @@
+name,segment,city,state,lat,lon,naics,description,url
+Lockheed Martin Aeronautics,Prime,Fort Worth,TX,32.760,-97.440,336411,F-35 final assembly and aircraft manufacturing; major build-to-print machining demand,https://www.lockheedmartin.com
+RTX (Raytheon),Prime,Tucson,AZ,32.221,-110.969,336414,Missile and propulsion systems; precision machined flight-critical components,https://www.rtx.com
+Northrop Grumman,Prime,Palmdale,CA,34.579,-118.100,336411,B-21 production and advanced aircraft; titanium machining supply base,https://www.northropgrumman.com
+Boeing Defense,Prime,St. Louis,MO,38.750,-90.360,336411,Fighter aircraft and weapons; build-to-print structural components,https://www.boeing.com
+Precision Aerospace Machining Inc,Regional Manufacturer,Hartford,CT,41.764,-72.673,332710,5-axis CNC precision machining shop; AS9100 and ITAR registered
+Titan Build-to-Print LLC,Tier 1 Supplier,Wichita,KS,37.687,-97.336,332710,Build-to-print machined components for defense primes; AS9100 ITAR NADCAP
+Summit CNC Solutions,Regional Manufacturer,Cleveland,OH,41.499,-81.694,332710,5-axis CNC machining and assembly of flight-critical components
+Allied Flight Components,Tier 1 Supplier,San Diego,CA,32.716,-117.161,336413,Flight-critical assemblies and machined parts for the F-35 program
+Granite State Machine,Regional Manufacturer,Manchester,NH,42.991,-71.463,332710,Precision machining of titanium and exotic alloys; build-to-print
+Keystone Defense Fabrication,Regional Manufacturer,Pittsburgh,PA,40.441,-79.996,332710,Forging casting and precision machining for defense and aerospace
+Naval Surface Warfare Center,Government Facility,Dahlgren,VA,38.400,-77.040,927110,Government test and evaluation facility; weapons systems integration
+Gulf Coast Aerostructures,Tier 1 Supplier,Mobile,AL,30.695,-88.040,336413,Aerostructures and build-to-print machined assemblies; AS9100
+Cascade Precision Works,Regional Manufacturer,Seattle,WA,47.606,-122.333,332710,5-axis CNC precision machining; AS9100; supplier to Boeing
+Frontier Munitions Systems,Tier 1 Supplier,,TX,,,332993,Munitions components and precision machining; build-to-print

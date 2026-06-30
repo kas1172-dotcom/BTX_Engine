@@ -1,0 +1,586 @@
+{
+  "generated_at": "2026-06-30T14:52:20.813783Z",
+  "config": {
+    "title": "BTX Account Map",
+    "region": "United States",
+    "center": {
+      "lat": 39.5,
+      "lon": -98.35
+    },
+    "zoom": 4,
+    "segments": [
+      "Prime",
+      "Tier 1 Supplier",
+      "Regional Manufacturer",
+      "Government Facility"
+    ],
+    "accent_color": "#1E3A8A",
+    "name": "BTX Aerospace & Defense Monitor",
+    "capabilities": [
+      "precision machining",
+      "build-to-print manufacturing",
+      "5-axis CNC machining",
+      "assembly of flight-critical components"
+    ]
+  },
+  "targets": [
+    {
+      "id": "49ce7b10b8b2",
+      "name": "Lockheed Martin Aeronautics",
+      "segment": "Prime",
+      "city": "Fort Worth",
+      "state": "TX",
+      "geo": {
+        "lat": 32.76,
+        "lon": -97.44
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Lockheed Martin Aeronautics",
+          "label": "NAICS",
+          "value": "336411",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Lockheed Martin Aeronautics",
+          "label": "Profile",
+          "value": "F-35 final assembly and aircraft manufacturing; major build-to-print machining demand",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 75,
+      "fit_tier": "hot",
+      "fit_rationale": "Strong fit — a known customer/prime (Lockheed Martin); active on F-35; served by build-to-print manufacturing.",
+      "serve_with": [
+        "build-to-print manufacturing"
+      ],
+      "source_id": "btx-targets",
+      "url": "https://www.lockheedmartin.com"
+    },
+    {
+      "id": "d1a7b4008f27",
+      "name": "Boeing Defense",
+      "segment": "Prime",
+      "city": "St. Louis",
+      "state": "MO",
+      "geo": {
+        "lat": 38.75,
+        "lon": -90.36
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Boeing Defense",
+          "label": "NAICS",
+          "value": "336411",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Boeing Defense",
+          "label": "Profile",
+          "value": "Fighter aircraft and weapons; build-to-print structural components",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 68,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — a known customer/prime (Boeing Defense); served by build-to-print manufacturing.",
+      "serve_with": [
+        "build-to-print manufacturing"
+      ],
+      "source_id": "btx-targets",
+      "url": "https://www.boeing.com"
+    },
+    {
+      "id": "3c181c8c1186",
+      "name": "Precision Aerospace Machining Inc",
+      "segment": "Regional Manufacturer",
+      "city": "Hartford",
+      "state": "CT",
+      "geo": {
+        "lat": 41.764,
+        "lon": -72.673
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Precision Aerospace Machining Inc",
+          "label": "NAICS",
+          "value": "332710",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Precision Aerospace Machining Inc",
+          "label": "Profile",
+          "value": "5-axis CNC precision machining shop; AS9100 and ITAR registered",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 64,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by precision machining, 5-axis CNC machining.",
+      "serve_with": [
+        "precision machining",
+        "5-axis CNC machining"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "a0e5ead8691f",
+      "name": "Northrop Grumman",
+      "segment": "Prime",
+      "city": "Palmdale",
+      "state": "CA",
+      "geo": {
+        "lat": 34.579,
+        "lon": -118.1
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Northrop Grumman",
+          "label": "NAICS",
+          "value": "336411",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Northrop Grumman",
+          "label": "Profile",
+          "value": "B-21 production and advanced aircraft; titanium machining supply base",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 57,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — a known customer/prime (Northrop Grumman); active on B-21.",
+      "serve_with": [],
+      "source_id": "btx-targets",
+      "url": "https://www.northropgrumman.com"
+    },
+    {
+      "id": "871812311aef",
+      "name": "Cascade Precision Works",
+      "segment": "Regional Manufacturer",
+      "city": "Seattle",
+      "state": "WA",
+      "geo": {
+        "lat": 47.606,
+        "lon": -122.333
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Cascade Precision Works",
+          "label": "NAICS",
+          "value": "332710",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Cascade Precision Works",
+          "label": "Profile",
+          "value": "5-axis CNC precision machining; AS9100; supplier to Boeing",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 56,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by precision machining, 5-axis CNC machining.",
+      "serve_with": [
+        "precision machining",
+        "5-axis CNC machining"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "b2b981b69542",
+      "name": "Frontier Munitions Systems",
+      "segment": "Tier 1 Supplier",
+      "city": null,
+      "state": "TX",
+      "geo": {
+        "lat": 31.054,
+        "lon": -97.563
+      },
+      "geo_approx": true,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Frontier Munitions Systems",
+          "label": "NAICS",
+          "value": "332993",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Frontier Munitions Systems",
+          "label": "Profile",
+          "value": "Munitions components and precision machining; build-to-print",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 56,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by precision machining, build-to-print manufacturing.",
+      "serve_with": [
+        "precision machining",
+        "build-to-print manufacturing"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "79e4137e8905",
+      "name": "Granite State Machine",
+      "segment": "Regional Manufacturer",
+      "city": "Manchester",
+      "state": "NH",
+      "geo": {
+        "lat": 42.991,
+        "lon": -71.463
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Granite State Machine",
+          "label": "NAICS",
+          "value": "332710",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Granite State Machine",
+          "label": "Profile",
+          "value": "Precision machining of titanium and exotic alloys; build-to-print",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 56,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by precision machining, build-to-print manufacturing.",
+      "serve_with": [
+        "precision machining",
+        "build-to-print manufacturing"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "bcd10140e644",
+      "name": "Summit CNC Solutions",
+      "segment": "Regional Manufacturer",
+      "city": "Cleveland",
+      "state": "OH",
+      "geo": {
+        "lat": 41.499,
+        "lon": -81.694
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Summit CNC Solutions",
+          "label": "NAICS",
+          "value": "332710",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Summit CNC Solutions",
+          "label": "Profile",
+          "value": "5-axis CNC machining and assembly of flight-critical components",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 56,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by 5-axis CNC machining, assembly of flight-critical components.",
+      "serve_with": [
+        "5-axis CNC machining",
+        "assembly of flight-critical components"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "bdec4161eac1",
+      "name": "Keystone Defense Fabrication",
+      "segment": "Regional Manufacturer",
+      "city": "Pittsburgh",
+      "state": "PA",
+      "geo": {
+        "lat": 40.441,
+        "lon": -79.996
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Keystone Defense Fabrication",
+          "label": "NAICS",
+          "value": "332710",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Keystone Defense Fabrication",
+          "label": "Profile",
+          "value": "Forging casting and precision machining for defense and aerospace",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 54,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by precision machining.",
+      "serve_with": [
+        "precision machining"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "0cbfc49df4cf",
+      "name": "Titan Build-to-Print LLC",
+      "segment": "Tier 1 Supplier",
+      "city": "Wichita",
+      "state": "KS",
+      "geo": {
+        "lat": 37.687,
+        "lon": -97.336
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Titan Build-to-Print LLC",
+          "label": "NAICS",
+          "value": "332710",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Titan Build-to-Print LLC",
+          "label": "Profile",
+          "value": "Build-to-print machined components for defense primes; AS9100 ITAR NADCAP",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 46,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — served by build-to-print manufacturing.",
+      "serve_with": [
+        "build-to-print manufacturing"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "db3a63877fe6",
+      "name": "RTX (Raytheon)",
+      "segment": "Prime",
+      "city": "Tucson",
+      "state": "AZ",
+      "geo": {
+        "lat": 32.221,
+        "lon": -110.969
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "RTX (Raytheon)",
+          "label": "NAICS",
+          "value": "336414",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "RTX (Raytheon)",
+          "label": "Profile",
+          "value": "Missile and propulsion systems; precision machined flight-critical components",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 42,
+      "fit_tier": "warm",
+      "fit_rationale": "Possible fit — a known customer/prime (RTX).",
+      "serve_with": [],
+      "source_id": "btx-targets",
+      "url": "https://www.rtx.com"
+    },
+    {
+      "id": "1a98d6c9d9a2",
+      "name": "Gulf Coast Aerostructures",
+      "segment": "Tier 1 Supplier",
+      "city": "Mobile",
+      "state": "AL",
+      "geo": {
+        "lat": 30.695,
+        "lon": -88.04
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Gulf Coast Aerostructures",
+          "label": "NAICS",
+          "value": "336413",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Gulf Coast Aerostructures",
+          "label": "Profile",
+          "value": "Aerostructures and build-to-print machined assemblies; AS9100",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 38,
+      "fit_tier": "cool",
+      "fit_rationale": "Low signal — served by build-to-print manufacturing.",
+      "serve_with": [
+        "build-to-print manufacturing"
+      ],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "1fb1684c4d4e",
+      "name": "Allied Flight Components",
+      "segment": "Tier 1 Supplier",
+      "city": "San Diego",
+      "state": "CA",
+      "geo": {
+        "lat": 32.716,
+        "lon": -117.161
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Allied Flight Components",
+          "label": "NAICS",
+          "value": "336413",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Allied Flight Components",
+          "label": "Profile",
+          "value": "Flight-critical assemblies and machined parts for the F-35 program",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 35,
+      "fit_tier": "cool",
+      "fit_rationale": "Low signal — active on F-35.",
+      "serve_with": [],
+      "source_id": "btx-targets",
+      "url": null
+    },
+    {
+      "id": "9cbd2113fa43",
+      "name": "Naval Surface Warfare Center",
+      "segment": "Government Facility",
+      "city": "Dahlgren",
+      "state": "VA",
+      "geo": {
+        "lat": 38.4,
+        "lon": -77.04
+      },
+      "geo_approx": false,
+      "facts": [
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Naval Surface Warfare Center",
+          "label": "NAICS",
+          "value": "927110",
+          "kind": "text",
+          "number": null,
+          "url": null
+        },
+        {
+          "enricher_id": "btx-targets",
+          "entity": "Naval Surface Warfare Center",
+          "label": "Profile",
+          "value": "Government test and evaluation facility; weapons systems integration",
+          "kind": "text",
+          "number": null,
+          "url": null
+        }
+      ],
+      "fit_score": 20,
+      "fit_tier": "cool",
+      "fit_rationale": "Low signal — no profile overlap detected.",
+      "serve_with": [],
+      "source_id": "btx-targets",
+      "url": null
+    }
+  ],
+  "placed_count": 14
+}

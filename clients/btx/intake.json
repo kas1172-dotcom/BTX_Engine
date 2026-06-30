@@ -1,0 +1,147 @@
+{
+  "monitor_name": "BTX Aerospace & Defense Monitor",
+  "accent_color": "#1E3A8A",
+  "audiences": [
+    {
+      "label": "Business Development",
+      "role": "BTX's BD and capture team tracking programs, funding, and prime-contractor activity BTX could win build-to-print and precision-machining work on.",
+      "matters": "Prioritise contract awards, solicitations, and RFPs to BTX's primes (Lockheed Martin, RTX, Northrop Grumman) and on its programs (F-35, B-21), especially machined build-to-print work BTX could subcontract for. Flag dollar values, sole-source justifications, set-aside status, and protest activity. Treat a prime's new award as a subcontracting opening.",
+      "topics": [
+        "Contract Award",
+        "Solicitation / RFP",
+        "Subcontracting Opportunity",
+        "Budget & Appropriations",
+        "Industry News"
+      ]
+    },
+    {
+      "label": "Executive Brief",
+      "role": "BTX leadership seeking the strategic, supply-chain, and ITAR/export-control developments that affect the business.",
+      "matters": "Surface major program decisions on F-35/B-21, significant defense funding changes, supply-chain and raw-material developments affecting BTX's ability to deliver, and ITAR/EAR/DFARS export-control actions that change BTX's compliance exposure. Tie each to BTX's goal of growing defense revenue.",
+      "topics": [
+        "Program Decision",
+        "Supply Chain",
+        "Export Controls / Compliance",
+        "Budget & Appropriations",
+        "Industry News"
+      ]
+    }
+  ],
+  "must_not_miss": [
+    "stop-work order",
+    "stop work",
+    "termination for default",
+    "debarment",
+    "suspension",
+    "fraud",
+    "FCPA",
+    "False Claims Act",
+    "whistleblower",
+    "program cancellation",
+    "continuing resolution"
+  ],
+  "noise_to_exclude": [
+    "obituary",
+    "sports",
+    "entertainment"
+  ],
+  "named_entities": [
+    "Lockheed Martin",
+    "RTX",
+    "Northrop Grumman",
+    "Boeing",
+    "F-35",
+    "B-21",
+    "DoD",
+    "DCMA",
+    "ITAR",
+    "DFARS"
+  ],
+  "coverage": [
+    {
+      "name": "Federal Register (DoD, Air Force)",
+      "what": "Proposed and final rules, notices from Defense and the Air Force",
+      "kind": "official",
+      "url_hint": "federalregister.gov API"
+    },
+    {
+      "name": "SpaceNews",
+      "what": "Defense space and industry news",
+      "kind": "news",
+      "url_hint": "spacenews.com/feed"
+    },
+    {
+      "name": "Defense trade press",
+      "what": "Industry and program reporting (Defense News, Breaking Defense, etc.)",
+      "kind": "news",
+      "url_hint": null
+    }
+  ],
+  "cadence": {
+    "frequency": "weekly",
+    "day": "monday",
+    "hour_local": 7,
+    "timezone": "America/New_York"
+  },
+  "depth_sections": [
+    "background",
+    "key_stakeholders",
+    "scenarios",
+    "recommended_actions"
+  ],
+  "paid_sources": [],
+  "profile": {
+    "capabilities": [
+      "precision machining",
+      "build-to-print manufacturing",
+      "5-axis CNC machining",
+      "assembly of flight-critical components"
+    ],
+    "certifications": [
+      "AS9100",
+      "ITAR registered",
+      "NADCAP"
+    ],
+    "industries_served": [
+      "defense",
+      "aerospace"
+    ],
+    "customer_types": [
+      "defense primes",
+      "Tier 1 aerospace suppliers"
+    ],
+    "geographic_focus": [
+      "United States"
+    ],
+    "strategic_goals": [
+      "grow defense revenue",
+      "win new build-to-print programs",
+      "deepen prime-contractor relationships"
+    ],
+    "risks": [
+      "supply-chain disruption",
+      "ITAR/export-control compliance",
+      "skilled-labor shortage",
+      "raw-material cost volatility"
+    ],
+    "named_entities": {
+      "customers": [
+        "Lockheed Martin",
+        "RTX",
+        "Northrop Grumman",
+        "Boeing Defense"
+      ],
+      "competitors": [],
+      "agencies": [
+        "Department of Defense",
+        "DCMA",
+        "State Department DDTC"
+      ],
+      "programs": [
+        "F-35",
+        "B-21",
+        "hypersonics"
+      ]
+    }
+  }
+}

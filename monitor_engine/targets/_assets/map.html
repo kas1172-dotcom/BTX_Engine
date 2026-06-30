@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1E3A8A" id="meta-theme-color">
+  <title>Account Map</title>
+  <!-- Leaflet (interactive map library) + OpenStreetMap tiles. The one runtime
+       CDN dependency; a map needs network for tiles regardless. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <style>/* STYLE_PLACEHOLDER */</style>
+</head>
+<body>
+  <div id="loading-screen" aria-live="polite">
+    <div class="loading-inner"><p>Loading account map…</p></div>
+  </div>
+
+  <div id="app" hidden>
+    <aside class="sidebar" id="sidebar">
+      <header class="sidebar-head">
+        <h1 class="map-title" id="map-title"></h1>
+        <p class="map-sub" id="map-sub"></p>
+        <a class="brief-link" id="brief-link" href="index.html">← Intelligence brief</a>
+      </header>
+
+      <div class="controls">
+        <input type="search" id="search" class="search" placeholder="Search accounts…" autocomplete="off">
+        <div class="control-row">
+          <label for="segment">Segment</label>
+          <select id="segment"></select>
+        </div>
+        <div class="control-row">
+          <label for="minfit">Min fit: <span id="minfit-val">0</span></label>
+          <input type="range" id="minfit" min="0" max="100" value="0" step="5">
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+
+      <div class="count-bar" id="count-bar"></div>
+      <ul class="account-list" id="account-list"></ul>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map"></div>
+    </main>
+  </div>
+
+  <script>window.__DATA_URL = 'DATA_FILENAME_PLACEHOLDER';</script>
+  <script>/* SCRIPT_PLACEHOLDER */</script>
+</body>
+</html>
