@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T14:52:20.813783Z",
+  "generated_at": "2026-06-30T15:11:43.943307Z",
   "config": {
     "title": "BTX Account Map",
     "region": "United States",
@@ -14,7 +14,7 @@
       "Regional Manufacturer",
       "Government Facility"
     ],
-    "accent_color": "#1E3A8A",
+    "accent_color": "#38BDF8",
     "name": "BTX Aerospace & Defense Monitor",
     "capabilities": [
       "precision machining",

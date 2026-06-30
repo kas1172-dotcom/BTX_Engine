@@ -954,3 +954,142 @@ button {
   text-decoration: none;
 }
 .account-map-link:hover { background: var(--accent-dark); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   COCKPIT THEME — dark "HUD" skin (Jarvis-lite). Layered last so it
+   overrides the light defaults via source order. --accent is supplied at
+   runtime from branding (a bright cyan-blue) and used for the glow chrome.
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+  --text: #e6edf3;
+  --text-sec: #9fb0c3;
+  --text-muted: #6b7c93;
+  --bg: #070b12;
+  --surface: #0f1620;
+  --surface-alt: #0b111a;
+  --border: #1c2738;
+  --t2-accent: #8aa0bd;
+  --t3-color: #7d8aa0;
+  --shadow: 0 1px 3px rgba(0,0,0,.5);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.55);
+  --glow: var(--accent);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  /* faint HUD grid + corner glow */
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(56,189,248,.10), transparent 60%),
+    linear-gradient(rgba(56,189,248,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,.035) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-attachment: fixed;
+}
+::selection { background: rgba(56,189,248,.30); }
+
+/* Scrollbar */
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+
+/* Boot screen → HUD pulse */
+#loading-screen { background: var(--bg); }
+.loading-inner { color: var(--accent); letter-spacing: .18em; text-transform: uppercase; font-size: .8rem; }
+.loading-spinner {
+  border-color: rgba(56,189,248,.18); border-top-color: var(--accent);
+  box-shadow: 0 0 18px rgba(56,189,248,.45);
+}
+
+/* Header — translucent, blurred, hairline glow underline */
+.site-header {
+  background: rgba(10,15,22,.78);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, var(--accent), transparent) 1;
+  box-shadow: 0 1px 24px rgba(56,189,248,.10);
+}
+.site-title {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .04em;
+  text-shadow: 0 0 18px rgba(56,189,248,.35);
+}
+.site-title::before { content: "▮ "; color: var(--accent); }
+
+/* Edition nav + filter chrome */
+.edition-btn, .cat-pill, .date-btn, .filter-toggle, .search-input, .fb-textarea, .fb-action {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-sec);
+}
+.edition-btn.active { color: var(--accent); border-color: var(--accent) !important; box-shadow: 0 0 0 1px var(--accent) inset, 0 0 12px rgba(56,189,248,.25); }
+.cat-pill.active, .date-btn.active { color: var(--accent); border-color: var(--accent) !important; }
+
+/* Tier headings — mono command labels */
+.tier-heading {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-transform: uppercase; letter-spacing: .16em; font-size: .92rem;
+  color: var(--text-sec);
+}
+.tier-heading::before { content: "▸ "; color: var(--accent); }
+.tier1-heading { color: var(--t1-accent); }
+
+/* Cards — dark panels with edge glow on hover */
+.full-card, .compact-row, .editorial, .deep-panel, .entity-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.full-card { border-left: 2px solid var(--accent); }
+.full-card:hover, .compact-row:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(56,189,248,.25), 0 12px 30px rgba(0,0,0,.5);
+  transform: translateY(-1px);
+}
+.analysis-label {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--accent); opacity: .9;
+}
+.card-meta, .compact-meta, .run-meta, .ai-meta {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .72rem;
+}
+
+/* Chips / badges / dots — neon on dark */
+.new-badge { background: var(--accent); color: #02121e; box-shadow: 0 0 12px rgba(56,189,248,.5); }
+.stat-chip, .cat-tag, .enrich-fact, .entity-node, .sig-chip {
+  background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-sec);
+}
+.entity-node:hover, .cat-tag:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(56,189,248,.2); }
+.enrich-fact.money { border-left: 2px solid var(--accent); }
+.enrich-source, .serve-chip, .enrich-label { color: var(--accent); }
+
+/* HUD buttons */
+.deep-btn, .entity-map-btn, .account-map-link, .fb-btn {
+  background: rgba(56,189,248,.06) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--accent) !important;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .04em;
+  transition: box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.deep-btn:hover, .entity-map-btn:hover, .account-map-link:hover, .fb-btn:hover {
+  border-color: var(--accent) !important; box-shadow: 0 0 14px rgba(56,189,248,.3);
+}
+.account-map-link { color: #02121e !important; background: var(--accent) !important; box-shadow: 0 0 16px rgba(56,189,248,.4); }
+.fb-btn.fb-active { background: var(--accent) !important; color: #02121e !important; }
+
+.integrations-badge {
+  background: rgba(56,189,248,.08); border: 1px solid var(--border);
+  color: var(--accent); box-shadow: 0 0 14px rgba(56,189,248,.12) inset;
+}
+.entity-count { background: var(--accent); color: #02121e; }
+
+/* Editorial — feature panel */
+.editorial { border-left: 2px solid var(--accent); }
+.editorial-theme { color: var(--accent); }
+
+/* Links */
+a { color: var(--accent); }
+a:hover { text-shadow: 0 0 10px rgba(56,189,248,.4); }
+.source-tag { color: var(--text-muted); }

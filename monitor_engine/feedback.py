@@ -16,7 +16,6 @@ Everything here is pure and order-preserving; nothing is mutated in place.
 """
 from __future__ import annotations
 
-import json
 import logging
 from pathlib import Path
 

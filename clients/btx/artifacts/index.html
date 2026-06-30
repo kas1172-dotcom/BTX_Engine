@@ -481,6 +481,32 @@ button {
 .also-covered .also-link:hover { color: var(--text); }
 .also-covered .nonlink { color: var(--text-sec); }
 
+/* Per-item feedback controls (pin / hide / mute source) */
+.fb-controls { display: flex; gap: 6px; margin-top: 10px; }
+.fb-btn {
+  font-size: .9rem; line-height: 1; padding: 4px 7px; border: 1px solid #8884;
+  border-radius: 6px; background: transparent; cursor: pointer; opacity: .55;
+  filter: grayscale(1);
+}
+.fb-btn:hover { opacity: .9; filter: none; }
+.fb-btn.fb-active { opacity: 1; filter: none; border-color: var(--accent); background: var(--accent-bg); }
+
+/* Feedback panel (in the filter sidebar) */
+.feedback-section .fb-help { font-size: .75rem; color: var(--text-sec); margin: 2px 0 8px; }
+.fb-sublabel { display: block; font-size: .72rem; color: var(--text-sec); margin: 6px 0 2px; }
+.fb-textarea {
+  width: 100%; box-sizing: border-box; font: inherit; font-size: .8rem;
+  padding: 5px 7px; border: 1px solid #8884; border-radius: 6px;
+  background: transparent; color: inherit; resize: vertical;
+}
+.fb-summary { font-size: .72rem; color: var(--text-sec); margin: 8px 0; }
+.fb-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.fb-action {
+  font: inherit; font-size: .78rem; font-weight: 600; padding: 6px 10px; border: 0;
+  border-radius: 6px; background: var(--accent); color: #fff; cursor: pointer;
+}
+.fb-action-secondary { background: #6b7280; }
+
 /* Stat chips strip */
 .stat-chips {
   display: flex;
@@ -784,6 +810,296 @@ button {
   .date-btn { min-height: 44px; display: flex; align-items: center; }
   .search-input { min-height: 44px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Signal Mesh — cross-API enrichment, entity graph, explorer
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Live integrations badge in the header */
+.integrations-badge {
+  margin-top: .5rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--accent-dark);
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .25rem .7rem;
+  display: inline-block;
+}
+
+/* Enrichment ("Live data") block on cards */
+.enrichment-block {
+  margin-top: .85rem;
+  padding-top: .7rem;
+  border-top: 1px dashed var(--border);
+}
+.enrich-group { margin-top: .5rem; }
+.enrich-entity {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.enrich-source {
+  font-size: .62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--accent-dark);
+  background: var(--accent-bg);
+  border-radius: 4px;
+  padding: .08rem .35rem;
+}
+.enrich-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .35rem;
+}
+.enrich-fact {
+  display: inline-flex;
+  flex-direction: column;
+  gap: .1rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .3rem .55rem;
+  min-width: 0;
+}
+.enrich-fact.money { border-left: 3px solid var(--accent); }
+.enrich-label {
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+}
+.enrich-value { font-size: .85rem; font-weight: 600; }
+
+/* Related ("Connected stories") block */
+.related-block {
+  margin-top: .85rem;
+  padding-top: .7rem;
+  border-top: 1px dashed var(--border);
+}
+.related-row {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  margin-top: .35rem;
+  flex-wrap: wrap;
+}
+.related-link { font-size: .85rem; font-weight: 600; }
+.related-link::before { content: "↳ "; color: var(--text-muted); }
+.related-via { font-size: .7rem; color: var(--text-muted); }
+
+/* Entity explorer button + panel */
+.entity-map-btn {
+  margin-top: .6rem;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--surface);
+  color: var(--accent-dark);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: .35rem .7rem;
+}
+.entity-map-btn:hover { background: var(--accent-bg); }
+.entity-panel {
+  margin: 1rem 0 0;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.06);
+}
+.entity-panel-title {
+  font-size: .8rem;
+  color: var(--text-muted);
+  margin: 0 0 .6rem;
+}
+.entity-grid { display: flex; flex-wrap: wrap; gap: .5rem; }
+.entity-node {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  cursor: pointer;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .3rem .7rem;
+  font-size: .82rem;
+}
+.entity-node:hover { border-color: var(--accent); color: var(--accent-dark); }
+.entity-name { font-weight: 600; }
+.entity-count {
+  font-size: .7rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
+  min-width: 1.2rem;
+  text-align: center;
+  padding: .05rem .35rem;
+}
+
+/* Account Map link in the header (BTX Revenue Cockpit cross-nav) */
+.account-map-link {
+  display: inline-block;
+  margin-top: .5rem;
+  margin-right: .6rem;
+  font-size: .78rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 8px;
+  padding: .3rem .7rem;
+  text-decoration: none;
+}
+.account-map-link:hover { background: var(--accent-dark); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   COCKPIT THEME — dark "HUD" skin (Jarvis-lite). Layered last so it
+   overrides the light defaults via source order. --accent is supplied at
+   runtime from branding (a bright cyan-blue) and used for the glow chrome.
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+  --text: #e6edf3;
+  --text-sec: #9fb0c3;
+  --text-muted: #6b7c93;
+  --bg: #070b12;
+  --surface: #0f1620;
+  --surface-alt: #0b111a;
+  --border: #1c2738;
+  --t2-accent: #8aa0bd;
+  --t3-color: #7d8aa0;
+  --shadow: 0 1px 3px rgba(0,0,0,.5);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,.55);
+  --glow: var(--accent);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  /* faint HUD grid + corner glow */
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(56,189,248,.10), transparent 60%),
+    linear-gradient(rgba(56,189,248,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,.035) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-attachment: fixed;
+}
+::selection { background: rgba(56,189,248,.30); }
+
+/* Scrollbar */
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+
+/* Boot screen → HUD pulse */
+#loading-screen { background: var(--bg); }
+.loading-inner { color: var(--accent); letter-spacing: .18em; text-transform: uppercase; font-size: .8rem; }
+.loading-spinner {
+  border-color: rgba(56,189,248,.18); border-top-color: var(--accent);
+  box-shadow: 0 0 18px rgba(56,189,248,.45);
+}
+
+/* Header — translucent, blurred, hairline glow underline */
+.site-header {
+  background: rgba(10,15,22,.78);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, var(--accent), transparent) 1;
+  box-shadow: 0 1px 24px rgba(56,189,248,.10);
+}
+.site-title {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .04em;
+  text-shadow: 0 0 18px rgba(56,189,248,.35);
+}
+.site-title::before { content: "▮ "; color: var(--accent); }
+
+/* Edition nav + filter chrome */
+.edition-btn, .cat-pill, .date-btn, .filter-toggle, .search-input, .fb-textarea, .fb-action {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-sec);
+}
+.edition-btn.active { color: var(--accent); border-color: var(--accent) !important; box-shadow: 0 0 0 1px var(--accent) inset, 0 0 12px rgba(56,189,248,.25); }
+.cat-pill.active, .date-btn.active { color: var(--accent); border-color: var(--accent) !important; }
+
+/* Tier headings — mono command labels */
+.tier-heading {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-transform: uppercase; letter-spacing: .16em; font-size: .92rem;
+  color: var(--text-sec);
+}
+.tier-heading::before { content: "▸ "; color: var(--accent); }
+.tier1-heading { color: var(--t1-accent); }
+
+/* Cards — dark panels with edge glow on hover */
+.full-card, .compact-row, .editorial, .deep-panel, .entity-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.full-card { border-left: 2px solid var(--accent); }
+.full-card:hover, .compact-row:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(56,189,248,.25), 0 12px 30px rgba(0,0,0,.5);
+  transform: translateY(-1px);
+}
+.analysis-label {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--accent); opacity: .9;
+}
+.card-meta, .compact-meta, .run-meta, .ai-meta {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .72rem;
+}
+
+/* Chips / badges / dots — neon on dark */
+.new-badge { background: var(--accent); color: #02121e; box-shadow: 0 0 12px rgba(56,189,248,.5); }
+.stat-chip, .cat-tag, .enrich-fact, .entity-node, .sig-chip {
+  background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-sec);
+}
+.entity-node:hover, .cat-tag:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(56,189,248,.2); }
+.enrich-fact.money { border-left: 2px solid var(--accent); }
+.enrich-source, .serve-chip, .enrich-label { color: var(--accent); }
+
+/* HUD buttons */
+.deep-btn, .entity-map-btn, .account-map-link, .fb-btn {
+  background: rgba(56,189,248,.06) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--accent) !important;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: .04em;
+  transition: box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.deep-btn:hover, .entity-map-btn:hover, .account-map-link:hover, .fb-btn:hover {
+  border-color: var(--accent) !important; box-shadow: 0 0 14px rgba(56,189,248,.3);
+}
+.account-map-link { color: #02121e !important; background: var(--accent) !important; box-shadow: 0 0 16px rgba(56,189,248,.4); }
+.fb-btn.fb-active { background: var(--accent) !important; color: #02121e !important; }
+
+.integrations-badge {
+  background: rgba(56,189,248,.08); border: 1px solid var(--border);
+  color: var(--accent); box-shadow: 0 0 14px rgba(56,189,248,.12) inset;
+}
+.entity-count { background: var(--accent); color: #02121e; }
+
+/* Editorial — feature panel */
+.editorial { border-left: 2px solid var(--accent); }
+.editorial-theme { color: var(--accent); }
+
+/* Links */
+a { color: var(--accent); }
+a:hover { text-shadow: 0 0 10px rgba(56,189,248,.4); }
+.source-tag { color: var(--text-muted); }
 </style>
 </head>
 <body>
@@ -825,6 +1141,20 @@ button {
       <div class="filter-section">
         <p class="filter-label">Date</p>
         <div class="date-filters" id="date-filters"></div>
+      </div>
+      <div class="filter-section feedback-section" id="feedback-section">
+        <p class="filter-label">Feedback for next run</p>
+        <p class="fb-help">Use 📌 / 🚫 / 🔇 on items to pin, hide, or mute a source.
+          Add terms below, then download <code>feedback.json</code> and commit it.</p>
+        <label class="fb-sublabel" for="fb-boost">Boost terms (more of these)</label>
+        <textarea id="fb-boost" class="fb-textarea" rows="2" placeholder="one per line"></textarea>
+        <label class="fb-sublabel" for="fb-mute">Mute terms (less of these)</label>
+        <textarea id="fb-mute" class="fb-textarea" rows="2" placeholder="one per line"></textarea>
+        <div class="fb-summary" id="fb-summary"></div>
+        <div class="fb-actions">
+          <button type="button" id="fb-download" class="fb-action">Download feedback.json</button>
+          <button type="button" id="fb-clear" class="fb-action fb-action-secondary">Clear</button>
+        </div>
       </div>
       <div class="run-meta" id="run-meta"></div>
     </aside>
@@ -871,7 +1201,12 @@ const state = {
   dateFilter: 'all',     // 'all' | 'week' | 'month'
   searchQuery: '',       // lowercased keyword filter, '' = no filter
   newIds: new Set(),     // item_ids that are new this run
+  feedback: emptyFeedback(),  // client feedback captured this session (→ feedback.json)
 };
+
+function emptyFeedback() {
+  return { pin_urls: [], suppress_urls: [], mute_sources: [], boost_terms: [], mute_terms: [] };
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    Boot
@@ -912,10 +1247,16 @@ function boot() {
     state.activeEdition = cfg.editions[0].id;
   }
 
+  state.feedback = loadFeedback(cfg);
+
   applyBranding(cfg);
+  buildAccountMapLink(cfg);
+  buildIntegrationsBadge(cfg);
   buildEditionNav(cfg);
   buildFilterPanel(cfg);
+  buildEntityExplorer();
   wireFilterToggle();
+  setupFeedbackPanel();
   renderRunMeta();
   render();
 
@@ -954,6 +1295,124 @@ function hexAlpha(hex, a) {
   return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
 }
 function clamp(v) { return Math.max(0, Math.min(255, v)); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   Feedback capture — per-item controls + downloadable feedback.json
+   ───────────────────────────────────────────────────────────────────
+   Client-side only: choices persist in localStorage and export to a
+   feedback.json matching the engine's Feedback schema. The operator commits
+   that file and the next run honors it. No backend; localStorage/Blob are
+   guarded so the headless test harness (no storage, no Blob) still renders.
+   ═══════════════════════════════════════════════════════════════════ */
+function feedbackStorageKey(cfg) {
+  return 'monitor_feedback:' + ((cfg && cfg.name) || 'default');
+}
+
+function loadFeedback(cfg) {
+  const fb = emptyFeedback();
+  if (typeof localStorage === 'undefined') return fb;
+  try {
+    const raw = localStorage.getItem(feedbackStorageKey(cfg));
+    if (raw) Object.assign(fb, JSON.parse(raw));
+  } catch (e) { /* ignore corrupt storage */ }
+  for (const k of Object.keys(fb)) if (!Array.isArray(fb[k])) fb[k] = [];
+  return fb;
+}
+
+function saveFeedback() {
+  if (typeof localStorage !== 'undefined') {
+    try {
+      const cfg = state.data && state.data.site_config;
+      localStorage.setItem(feedbackStorageKey(cfg), JSON.stringify(state.feedback));
+    } catch (e) { /* storage full / unavailable — non-fatal */ }
+  }
+  updateFeedbackSummary();
+}
+
+function toggleInList(list, value) {
+  const i = list.indexOf(value);
+  if (i === -1) list.push(value); else list.splice(i, 1);
+  return i === -1;   // true = now present
+}
+
+function splitTerms(v) {
+  return String(v || '').split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+}
+
+// Per-item pin / hide / mute-source toggles. Records into state.feedback; does
+// not alter the current view (suppression/pinning take effect on the next run).
+function feedbackControls(item) {
+  const wrap = el('div', 'fb-controls');
+  const fb = state.feedback;
+  const mk = (label, title, isActive, onToggle) => {
+    const b = el('button', 'fb-btn' + (isActive() ? ' fb-active' : ''));
+    b.type = 'button';
+    b.textContent = label;
+    b.title = title;
+    b.addEventListener('click', (e) => {
+      if (e && e.preventDefault) { e.preventDefault(); e.stopPropagation(); }
+      const now = onToggle();
+      b.classList.toggle('fb-active', now);
+      saveFeedback();
+    });
+    return b;
+  };
+  wrap.appendChild(mk('📌', 'Pin — always surface this item',
+    () => fb.pin_urls.includes(item.url), () => toggleInList(fb.pin_urls, item.url)));
+  wrap.appendChild(mk('🚫', 'Hide — drop this item from the next brief',
+    () => fb.suppress_urls.includes(item.url), () => toggleInList(fb.suppress_urls, item.url)));
+  wrap.appendChild(mk('🔇', 'Mute source — ' + item.source_id,
+    () => fb.mute_sources.includes(item.source_id), () => toggleInList(fb.mute_sources, item.source_id)));
+  return wrap;
+}
+
+function setupFeedbackPanel() {
+  const boost = document.getElementById('fb-boost');
+  const mute = document.getElementById('fb-mute');
+  if (boost) {
+    boost.value = state.feedback.boost_terms.join('\n');
+    boost.addEventListener('input', () => { state.feedback.boost_terms = splitTerms(boost.value); saveFeedback(); });
+  }
+  if (mute) {
+    mute.value = state.feedback.mute_terms.join('\n');
+    mute.addEventListener('input', () => { state.feedback.mute_terms = splitTerms(mute.value); saveFeedback(); });
+  }
+  const dl = document.getElementById('fb-download');
+  if (dl) dl.addEventListener('click', downloadFeedback);
+  const clear = document.getElementById('fb-clear');
+  if (clear) clear.addEventListener('click', () => {
+    state.feedback = emptyFeedback();
+    if (boost) boost.value = '';
+    if (mute) mute.value = '';
+    saveFeedback();
+    render();   // refresh card button states
+  });
+  updateFeedbackSummary();
+}
+
+function updateFeedbackSummary() {
+  const sum = document.getElementById('fb-summary');
+  if (!sum) return;
+  const fb = state.feedback;
+  sum.textContent =
+    fb.pin_urls.length + ' pinned · ' + fb.suppress_urls.length + ' hidden · ' +
+    fb.mute_sources.length + ' muted · ' +
+    (fb.boost_terms.length + fb.mute_terms.length) + ' term(s)';
+}
+
+function downloadFeedback() {
+  const fb = state.feedback;
+  const out = {};
+  ['mute_terms', 'boost_terms', 'mute_sources', 'suppress_urls', 'pin_urls'].forEach(k => {
+    if (fb[k] && fb[k].length) out[k] = fb[k];
+  });
+  const json = JSON.stringify(out, null, 2);
+  if (typeof Blob === 'undefined' || typeof URL === 'undefined' || !URL.createObjectURL) return;
+  const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = 'feedback.json'; a.click();
+  URL.revokeObjectURL(url);
+}
 
 /* ═══════════════════════════════════════════════════════════════════
    Edition nav
@@ -1172,6 +1631,7 @@ function fullCard(item) {
   const ea = editionAnalysis(item);
   const isNew = state.newIds.has(item.item_id);
   const div = el('div', 'full-card');
+  div.setAttribute('id', 'item-' + item.item_id);   // anchor target for related links
 
   // NEW badge
   if (isNew) {
@@ -1238,7 +1698,14 @@ function fullCard(item) {
   const also = alsoCoveredBy(item);
   if (also) div.appendChild(also);
 
+  const enrich = enrichmentBlock(item);
+  if (enrich) div.appendChild(enrich);
+
+  const related = relatedBlock(item);
+  if (related) div.appendChild(related);
+
   div.appendChild(deepAnalysisBlock(item));
+  div.appendChild(feedbackControls(item));
   return div;
 }
 
@@ -1257,6 +1724,7 @@ function compactRow(item) {
   const ea = editionAnalysis(item);
   const isNew = state.newIds.has(item.item_id);
   const details = el('details', 'compact-row');
+  details.setAttribute('id', 'item-' + item.item_id);   // anchor target for related links
 
   // Summary (always visible)
   const summary = el('summary', 'compact-summary');
@@ -1328,7 +1796,14 @@ function compactRow(item) {
     const also = alsoCoveredBy(item);
     if (also) detail.appendChild(also);
 
+    const enrich = enrichmentBlock(item);
+    if (enrich) detail.appendChild(enrich);
+
+    const related = relatedBlock(item);
+    if (related) detail.appendChild(related);
+
     detail.appendChild(safeLink(item.url, 'Read source ↗', 'source-link'));
+    detail.appendChild(feedbackControls(item));
 
     details.appendChild(detail);
   }
@@ -1355,6 +1830,7 @@ function renderTier3(items) {
     li.appendChild(dot);
     li.appendChild(a);
     li.appendChild(deepAnalysisBlock(item));
+    li.appendChild(feedbackControls(item));
     list.appendChild(li);
   });
 }
@@ -1583,6 +2059,173 @@ function alsoCoveredBy(item) {
     wrap.appendChild(link);
   });
   return wrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Enrichment — cross-API facts attached to an item
+   ═══════════════════════════════════════════════════════════════════ */
+// Map enricher_id → display label from site_config, for grouping/headers.
+function enricherLabel(id) {
+  const cfg = state.data && state.data.site_config;
+  const list = (cfg && cfg.enrichers) || [];
+  const hit = list.find(e => e.id === id);
+  return (hit && hit.label) || id;
+}
+
+function factValueText(f) {
+  if (f.kind === 'money' && f.number != null) return fmtMoney(f.number, 'USD');
+  if (f.kind === 'number' && f.number != null) return fmtPop(f.number);
+  return f.value;
+}
+
+// "Live data" block: structured facts pulled from other APIs for this item's
+// entities. Grouped by the entity they were looked up for.
+function enrichmentBlock(item) {
+  const enr = item.enrichment;
+  const facts = (enr && enr.facts) || [];
+  if (!facts.length) return null;
+
+  const wrap = el('div', 'enrichment-block');
+  const label = el('span', 'analysis-label');
+  label.textContent = 'Live data';
+  wrap.appendChild(label);
+
+  // Group facts by entity so multiple lookups read cleanly.
+  const byEntity = new Map();
+  facts.forEach(f => {
+    if (!byEntity.has(f.entity)) byEntity.set(f.entity, []);
+    byEntity.get(f.entity).push(f);
+  });
+
+  byEntity.forEach((group, entity) => {
+    const grp = el('div', 'enrich-group');
+    const head = el('div', 'enrich-entity');
+    head.textContent = entity;
+    const badge = el('span', 'enrich-source');
+    badge.textContent = enricherLabel(group[0].enricher_id);
+    head.appendChild(badge);
+    grp.appendChild(head);
+
+    const facts_wrap = el('div', 'enrich-facts');
+    group.forEach(f => {
+      const chip = el('div', 'enrich-fact' + (f.kind === 'money' ? ' money' : ''));
+      const k = el('span', 'enrich-label');
+      k.textContent = f.label;
+      chip.appendChild(k);
+      const text = factValueText(f);
+      if (f.url) {
+        chip.appendChild(safeLink(f.url, text, 'enrich-value'));
+      } else {
+        const v = el('span', 'enrich-value');
+        v.textContent = text;
+        chip.appendChild(v);
+      }
+      facts_wrap.appendChild(chip);
+    });
+    grp.appendChild(facts_wrap);
+    wrap.appendChild(grp);
+  });
+  return wrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Related — entity-graph edges to other items in this brief
+   ═══════════════════════════════════════════════════════════════════ */
+function relatedBlock(item) {
+  const refs = (item && item.related) || [];
+  if (!refs.length) return null;
+  const wrap = el('div', 'related-block');
+  const label = el('span', 'analysis-label');
+  label.textContent = 'Connected stories';
+  wrap.appendChild(label);
+  refs.forEach(r => {
+    const row = el('div', 'related-row');
+    // Native in-page anchor: cards carry id="item-<item_id>".
+    const a = el('a', 'related-link');
+    a.href = '#item-' + r.item_id;
+    a.textContent = cleanTitle(r.title);
+    a.title = r.title;
+    row.appendChild(a);
+    if (r.via && r.via.length) {
+      const via = el('span', 'related-via');
+      via.textContent = 'via ' + r.via.join(', ');
+      row.appendChild(via);
+    }
+    wrap.appendChild(row);
+  });
+  return wrap;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Entity explorer — the run-level graph as a browsable index
+   ═══════════════════════════════════════════════════════════════════ */
+function buildEntityExplorer() {
+  const idx = (state.data && state.data.entity_index) || [];
+  if (!idx.length) return;
+
+  const header = document.getElementById('site-header');
+  const btn = el('button', 'entity-map-btn');
+  btn.type = 'button';
+  btn.textContent = '🕸 Entity map (' + idx.length + ')';
+  btn.setAttribute('aria-expanded', 'false');
+  header.appendChild(btn);
+
+  const overlay = document.getElementById('main-layout');
+  const panel = el('div', 'entity-panel');
+  panel.hidden = true;
+  const title = el('p', 'entity-panel-title');
+  title.textContent = 'Entities connecting this brief — click to filter';
+  panel.appendChild(title);
+
+  const grid = el('div', 'entity-grid');
+  idx.forEach(e => {
+    const node = el('button', 'entity-node');
+    node.type = 'button';
+    const nm = el('span', 'entity-name');
+    nm.textContent = e.name;
+    const ct = el('span', 'entity-count');
+    ct.textContent = e.item_ids.length;
+    node.appendChild(nm);
+    node.appendChild(ct);
+    node.title = e.type + ' · appears in ' + e.item_ids.length + ' items';
+    node.addEventListener('click', () => {
+      const input = document.getElementById('search-input');
+      if (input) { input.value = e.name; state.searchQuery = e.name.toLowerCase(); }
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      render();
+    });
+    grid.appendChild(node);
+  });
+  panel.appendChild(grid);
+  overlay.appendChild(panel);
+
+  btn.addEventListener('click', () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+}
+
+// "Account Map" link in the header — shown when the deployment ships a map page.
+function buildAccountMapLink(cfg) {
+  const url = cfg && cfg.account_map_url;
+  if (!url) return;
+  const header = document.getElementById('site-header');
+  const a = el('a', 'account-map-link');
+  a.href = url;
+  a.textContent = '🗺 Account Map';
+  header.appendChild(a);
+}
+
+// "Live integrations" badge in the header — names the active cross-API sources.
+function buildIntegrationsBadge(cfg) {
+  const enr = (cfg && cfg.enrichers) || [];
+  if (!enr.length) return;
+  const header = document.getElementById('site-header');
+  const badge = el('div', 'integrations-badge');
+  badge.textContent = '⚡ Live integrations: ' + enr.map(e => e.label).join(' · ');
+  header.appendChild(badge);
 }
 
 // Tidy a source title for display: collapse whitespace and clamp to ~80 chars

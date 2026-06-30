@@ -4,13 +4,13 @@ import hashlib
 import os
 from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from monitor_engine.models import ClientConfig, JsonApiSource, RawItem, SourceHealth
+from monitor_engine.models import ClientConfig, RawItem, SourceHealth
 
 
 _DEFAULT_TIMEOUT = 15  # seconds

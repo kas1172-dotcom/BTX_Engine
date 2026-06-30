@@ -17,7 +17,6 @@ import html
 import json
 import shutil
 from pathlib import Path
-from typing import Any
 
 _DEFAULT_ACCENT = "#0F766E"
 

@@ -68,15 +68,6 @@ def score_fit(
     score += 15 * len(program_hits)
     score += 22 * len(customer_hits)
     score += 8 * len(industry_hits)
-
-    in_focus = False
-    if state_abbr and profile.geographic_focus:
-        # geographic_focus is usually country-level ("United States"); a state match
-        # is a light positive signal, not a strong one.
-        in_focus = any(_phrase_matches(g, (segment or "")) for g in profile.geographic_focus)
-    if in_focus:
-        score += 5
-
     score = max(0, min(100, score))
     tier = "hot" if score >= _TIER_HOT else "warm" if score >= _TIER_WARM else "cool"
 

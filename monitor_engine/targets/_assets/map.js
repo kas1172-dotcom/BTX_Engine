@@ -11,7 +11,7 @@ const state = {
   filters: { q: '', segment: '', minFit: 0 },
 };
 
-const TIER_COLOR = { hot: '#DD4B39', warm: '#E8A33D', cool: '#94A3B8' };
+const TIER_COLOR = { hot: '#FF5A4D', warm: '#F0B441', cool: '#6B7C93' };
 const US_CENTER = { lat: 39.5, lon: -98.35 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -84,9 +84,11 @@ function wireControls() {
 function initMap(cfg) {
   if (typeof L === 'undefined') return;                 // Leaflet unavailable (e.g. offline test)
   const c = cfg.center || US_CENTER;
-  state.map = L.map('map').setView([c.lat, c.lon], cfg.zoom || 5);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18, attribution: '© OpenStreetMap contributors',
+  state.map = L.map('map', { zoomControl: true }).setView([c.lat, c.lon], cfg.zoom || 5);
+  // Dark "command center" basemap (CARTO dark) — falls back gracefully if offline.
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19, subdomains: 'abcd',
+    attribution: '© OpenStreetMap contributors © CARTO',
   }).addTo(state.map);
 }
 
@@ -121,8 +123,10 @@ function renderMarkers(visible) {
     if (!t.geo) return;
     const marker = L.circleMarker([t.geo.lat, t.geo.lon], {
       radius: 6 + Math.round(t.fit_score / 18),
-      color: '#fff', weight: 1.5, fillColor: TIER_COLOR[t.fit_tier] || TIER_COLOR.cool,
+      color: 'rgba(255,255,255,.85)', weight: 1.5,
+      fillColor: TIER_COLOR[t.fit_tier] || TIER_COLOR.cool,
       fillOpacity: 0.9,
+      className: 'pin-' + t.fit_tier,          // CSS adds tier-colored glow / pulse
     }).addTo(state.map);
     marker.bindPopup(popupHtml(t), { maxWidth: 300 });
     marker.on('popupopen', () => wireLiveButton(t));
